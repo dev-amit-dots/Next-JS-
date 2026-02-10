@@ -36,7 +36,7 @@ const headerMenu = [
 
     { name: 'Contact', href: '/contact' },
     { name: 'Blog', href: '/blog' },
-    // { name: 'Register Now', href: '/register' },
+    { name: 'Product', href: '/product' },
 
 ]
 
