@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Mission from "./../mission/page"
 
@@ -24,12 +25,15 @@ export default function Home() {
         
         {/* Image Section → col-sm-4 */}
         <div className="col-span-12 sm:col-span-4 p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+         {/* here we want add a confirm box to open images popup when user click ok then image will be shown otherwise not */}
           <Image
             src="/images/dp.PNG"
             alt="Our Mission"
             width={400}
             height={300}
             className="rounded-lg object-cover w-full"
+            onClick={() => confirm('Are Your Sure you want see images')}
+
           />
         </div>
 
