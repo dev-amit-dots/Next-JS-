@@ -30,6 +30,7 @@ export default function ProfilePage() {
   useEffect(() => {
     try {
       const storedUser = localStorage.getItem("user");
+      console.log(storedUser);
       if (storedUser) {
         const userData = JSON.parse(storedUser);
         setUser({

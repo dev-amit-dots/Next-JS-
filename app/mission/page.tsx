@@ -1,6 +1,15 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
+  const [isImageLarge, setIsImageLarge] = useState(false);
+  const handleClick= () =>{
+    const confirmResult = confirm('Are Your Sure you want see images');
+    if(confirmResult){
+      setIsImageLarge(true);
+    }
+  }
   return (
     <section className="max-w-7xl mx-auto px-6 py-12">
       <h1 className="text-3xl font-bold text-center">
@@ -13,14 +22,38 @@ export default function Home() {
 
         {/* Image Section → col-sm-4 */}
         <div className="col-span-12 sm:col-span-4 p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+          {/* here we write a code for onclick when we click then open a alert box */}
           <Image
             src="/images/dp.PNG"
             alt="Our Mission"
             width={400}
-            height={300}
+            height={300} 
             className="rounded-lg object-cover w-full"
+            onClick={handleClick}
           />
         </div>
+
+          {/* Large Image Popup */}
+      {isImageLarge && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="">
+            <button
+              className="absolute top-2 right-2 bg-white px-3 py-1 rounded"
+              onClick={() => setIsImageLarge(false)}
+            >
+              X
+            </button>
+
+            <Image
+              src="/images/dp.PNG"
+              alt="Large Image"
+              width={800}
+              height={400}
+              className="rounded-lg"
+            />
+          </div>
+        </div>
+      )}
 
         {/* Content Section → col-sm-8 */}
         <div className="col-span-12 sm:col-span-8 p-6 bg-white rounded-xl shadow">
