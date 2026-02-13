@@ -159,6 +159,14 @@ export default function Home() {
 
             </div>
 
+                {/* we want show total item and showign item then user can see how many item hold here with range  like 30 to 60 like that */}
+            <div className="text-center mt-10">
+                <p className="text-gray-600">
+                    Showing {filteredProducts.length > 0 ? `${(currentPage - 1) * productsPerPage + 1} - ${Math.min(currentPage * productsPerPage, filteredProducts.length)}` : "0"} of {filteredProducts.length} products
+                </p>
+            </div>
+            
+                
             {/* Pagination */}
             <div className="flex justify-center items-center gap-2 mt-10 flex-wrap">
                 <button
