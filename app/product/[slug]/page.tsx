@@ -24,12 +24,13 @@ export default function ProductPage() {
     // Check Auth
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
-        else{
-            router.push("/login");
-        }
+        // this code for login user check it not then must go to login pages
+        // if (storedUser) {
+        //     setUser(JSON.parse(storedUser));
+        // }
+        // else{
+        //     router.push("/login");
+        // }
 
         const handleStorageChange = () => {
             const updatedUser = localStorage.getItem("user");

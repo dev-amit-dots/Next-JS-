@@ -3,6 +3,7 @@ import Image from "next/image";
 import * as React from "react";
 import ServiceCard from "./services/ServiceCard";
 import { servicesData } from "./services/servicesData";
+import BlankCard from "./components/BlankCard";
 import ProductCard from "./components/CardImages";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
@@ -12,6 +13,7 @@ import "swiper/css/navigation";
 
 export default function Home() {
   const [products, setProducts] = React.useState([]);
+  const [category,setCategory]=React.useState([]);
   const groceriesProduct=products.filter(
     (product: any) => product.category === 'groceries'
   );
@@ -23,6 +25,12 @@ export default function Home() {
               .then((data) => setProducts(data.products))
               .catch((err) => console.error(err));
       }, []);
+      React.useEffect(()=>{
+        fetch("https://dummyjson.com/products/categories")
+        .then((res)=>res.json())
+        .then((data)=>setCategory(data))
+        .catch((err)=>console.error(err));
+      }, [])
     const uniqueCategories = Array.from(
         new Set(products.map((product: any) => product.category))
     );
@@ -133,14 +141,15 @@ export default function Home() {
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
                 {/* Here we show category only */}
-                {uniqueCategories.map((category: any) => (
-                  <ServiceCard
-                    key={category}
-                    title={category.charAt(0).toUpperCase() + category.slice(1)}
+                {category.map((item: any) => (
+                  <BlankCard
+                    key={item.name}
+                    title={item.name.charAt(0).toUpperCase() + item.name.slice(1)}
                     description={''}
-                    icon={' '}
+                    icon={''}
                     mode="page"
-                    slug={category}
+                    slug={item.slug}
+                    redirectUrl={`product/category/${item.slug}`}
                   
                   />
                 ))}

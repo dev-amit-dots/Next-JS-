@@ -3,17 +3,17 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import BlogCards from "@/app/components/BlogCards";
 import ServiceModal from "../services/ServiceModal";
-import { blogData } from "./blogData";
+
 export default function Home() {
   const [selectedService, setSelectedService] = useState<any>(null);
   const [blogs, setBlogs] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-    fetch("https://shrimo.com/fake-api/blog")
+    fetch("https://dummyjson.com/posts")
       .then((res) => res.json())
       .then((data) => {
-        setBlogs(data.blogs); // IMPORTANT
+        setBlogs(data.posts); // IMPORTANT
         setLoading(false);
       })
       .catch((err) => {
@@ -34,10 +34,11 @@ export default function Home() {
     
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
             {blogs.map((blog,) => (
-                <BlogCards
-                  key={blog._id}
+                <BlogCards 
+                  id={blog.id}
+                  key={blog.id}
                   title={blog.title}
-                  description={blog.content}
+                  description={blog.body}
                   onClick={() => setSelectedService(blog)}
                 />
               ))}
@@ -48,7 +49,7 @@ export default function Home() {
             title={selectedService?.title}
             description={selectedService?.content}
             icon={selectedService?.icon}
-            fullDescription={selectedService?.fullDescription}
+            fullDescription={selectedService?.body}
           />
         </section>
   );
